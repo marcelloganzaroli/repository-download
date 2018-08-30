@@ -51,9 +51,15 @@ function getDownloadBaseUri(path) {
 
 function testRequest(url) {
     return new Promise(function () {
-        request( url, function (error, response, body) {
-            return body;
-        });
+        // return setHeaders(superagent.get(url), getAuthorizationToken(true));
+        request.get(
+            {
+                url: url,
+                forever: true,
+                headers: {
+                    "Authorization": getAuthorizationToken(true)
+                }
+            });
     });
 }
 

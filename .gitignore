@@ -1,0 +1,5 @@
+node_modules/
+mocha.json
+.idea/**/workspace.xml
+.idea/**/tasks.xml
+.idea/dictionaries

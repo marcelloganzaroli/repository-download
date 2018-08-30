@@ -1,0 +1,19 @@
+{
+  "name": "repository-backup-another",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "lodash": "^4.17.10",
+    "request": "^2.88.0",
+    "shelljs": "^0.8.2",
+    "simple-oauth2": "^2.2.1",
+    "superagent": "^3.8.3",
+    "superagent-logger": "^1.1.0"
+  }
+}

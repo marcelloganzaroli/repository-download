@@ -7,7 +7,7 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Launch Program",
+            "name": "Repository Downloader",
             "program": "${workspaceFolder}\\app.js",
             "args": ["fssibusinessdev", "./backup"],
         }

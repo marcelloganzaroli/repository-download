@@ -1,6 +1,6 @@
-const fs = require('fs');
 const _ = require('lodash');
-const { createGetRequest, getApiBaseUri, getDownloadBaseUri } = require('./src/service/bitbucketService');
+const { createGetRequest, getApiBaseUri,
+    getDownloadBaseUri, createDownloadRequest, testRequest } = require('./src/service/bitbucketService');
 
 function main(params) {
 
@@ -38,26 +38,21 @@ function getRepository(path) {
 }
 
 function downloadRepositories(repositories, pathToWrite) {
-    let promiseOfAllDownloadTask = _.map(repositories, (r) => {
-        return dowloadZipSource(getDownloadBaseUri(`${r.path}/get/HEAD.zip`));
+    const promiseOfAllDownloadTask = _.map(repositories, (r) => {
+        return testRequest(getDownloadBaseUri(`${r.path}/get/HEAD.zip`));
     });
     Promise.all(promiseOfAllDownloadTask)
-        .then((responses) => {
+        .then((responses) => {            
             writeFile(responses, pathToWrite);
         }, (error) => {
             console.log(error);
         })
 }
 
-function dowloadZipSource(path) {
-    console.log('Downloading', path);
-    return createGetRequest(path, true);
-}
-
 function storeRepositoryInfo(repos, requestRepositories) {
     if (!repos) { repos = []; };
     _.forEach(requestRepositories, function (repository) {
-        repos = _.concat(repos, [ { name: repository.name, path: repository.full_name } ]);
+        repos = _.concat(repos, [{ name: repository.name, path: repository.full_name }]);
     });
     return repos;
 }
@@ -75,6 +70,6 @@ function writeFile(stringFiles, pathToWrite) {
 
 }
 main({
-    "repositoryUser": process.argv[ 2 ],
-    "backupDirectory": process.argv[ 3 ]
+    "repositoryUser": process.argv[2],
+    "backupDirectory": process.argv[3]
 });

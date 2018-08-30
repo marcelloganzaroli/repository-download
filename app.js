@@ -24,7 +24,7 @@ function getUserRepositories(url, repos) {
     return getRepository(url)
         .then(function (response) {
             repos = storeRepositoryInfo(repos, response.body.values);
-            if (!response.body.next) {
+            if (!response.body.next) {     ////// ====> CHANGE THIS TO DOWNLOAD ALL PAGES
                 return getUserRepositories(response.body.next, repos)
             }
             return repos;

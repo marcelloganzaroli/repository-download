@@ -34,12 +34,12 @@ function getUserRepositories(url, repos) {
     return getRepository(url)
         .then(function (response) {
             repos = storeRepositoryInfo(repos, response.body.values);
-            if (!response.body.next) {   ////CHANGE THIS LATER TO DOWLOAD ALL PAGES
+            if (response.body.next) {   
                 return getUserRepositories(response.body.next, repos)
             }
             return repos;
         }, function (error) {
-            console.error("Failed!", error);
+            console.error(`Failed Retrieving: ${url}!`, error);
         });
 }
 

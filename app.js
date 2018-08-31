@@ -6,22 +6,22 @@ function main(params) {
     
     if (!shell.which('git')) {
         shell.echo('This script requires git');
-        shell.exit(1);
+        process.exit(1);
     }
 
     if (!params.backupDirectory) {
         console.log(`Specifiy a directory in app paramters`);
-        process.exit();
+        process.exit(1);
     };
 
     if (!params.repositoryUser) {
         console.log(`Specifiy an user in app paramters`);
-        process.exit();
+        process.exit(1);
     };
 
     if (!shell.test('-e', params.backupDirectory)) {
         console.log(`Directory ${params.backupDirectory} do not exists`);
-        process.exit();
+        process.exit(1);
     }
 
     getUserRepositories(getApiBaseUri(`/repositories/${params.repositoryUser}`))

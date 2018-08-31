@@ -1,20 +1,15 @@
 const superagent = require('superagent');
 const logger = require('superagent-logger');
 
-function createGetRequest(service, isDownloadCall, agent) {
+function createGetRequest(service, agent) {
     if (!agent) {
         agent = superagent;
     }
-    return setHeaders(agent.get(service), getAuthorizationToken(isDownloadCall));
+    return setHeaders(agent.get(service), getAuthorizationToken());
 }
 
-function getAuthorizationToken(isDownloadCall) {
-    if (!isDownloadCall) {
-        return process.env.API_BITBUCKET_SECRET;
-    } else {
-        return process.env.SITE_BITBUCKET_SECRET;
-    }
-
+function getAuthorizationToken() {
+    return process.env.API_BITBUCKET_SECRET;
 }
 
 function setHeaders(request, accessToken) {
@@ -31,12 +26,6 @@ function getApiBaseUri(path) {
     return `https://api.bitbucket.org/2.0${path}`;
 }
 
-function getDownloadBaseUri(path) {
-    return `https://bitbucket.org/${path}`;
-}
-
-
 exports.createGetRequest = createGetRequest;
 exports.getApiBaseUri = getApiBaseUri;
-exports.getDownloadBaseUri = getDownloadBaseUri;
 

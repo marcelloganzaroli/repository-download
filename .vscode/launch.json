@@ -9,7 +9,7 @@
             "request": "launch",
             "name": "Launch Program",
             "program": "${workspaceFolder}\\app.js",
-            "args": ["fssibusinessdev", "./backup"],
+            "args": ["fssibusinessdev", "C:\\Dev-Tests\\backup"],
         }
     ]
 }
